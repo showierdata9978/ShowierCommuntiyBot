@@ -27,6 +27,6 @@ if __name__ == '__main__':  # Ensures this is the file being ran
 		bot.load_extension(extension)  # Loades every extension.
 
 keep_alive()  # Starts a webserver to be pinged.
-token = "OTI2MjkwNDM3NTQ1NzkxNTA4.Yc5hMQ.2r5768zNz7yScEHq8JRA48o6lrs"  # Starts the bot
+token = ""  # Starts the bot
 
 bot.run(token)  # Starts the bot
