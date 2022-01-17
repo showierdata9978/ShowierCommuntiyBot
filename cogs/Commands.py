@@ -1,7 +1,6 @@
 from nextcord.ext import commands
 import sys
 
-from nextcord.ext.commands import bot
 
 
 class Command(commands.Cog, name="normal commands"):

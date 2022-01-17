@@ -1,6 +1,5 @@
 import os
 
-from nextcord.flags import Intents
 from keep_alive import keep_alive
 from nextcord.ext import commands 
 
@@ -27,6 +26,6 @@ if __name__ == '__main__':  # Ensures this is the file being ran
 		bot.load_extension(extension)  # Loades every extension.
 
 keep_alive()  # Starts a webserver to be pinged.
-token = ""  # Starts the bot
+token = "    "  # Starts the bot
 
 bot.run(token)  # Starts the bot
