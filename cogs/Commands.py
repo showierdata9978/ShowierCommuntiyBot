@@ -1,3 +1,4 @@
+
 from nextcord.ext import commands
 from nextcord import Embed
 import aiohttp
@@ -6,23 +7,25 @@ import random
 import nextcord
 import json
 
-class Command(commands.Cog, name="normal commands"):
-	def __init__(self, bot):
-	    self.bot = bot	
-	@commands.command(name="ping")
-	async def ping(self, ctx):
-	    self.ctx = ctx
-	    await self.ctx.send(f"The Bots Ping is {round(ctx.bot.latency,1)}, The server name is {ctx.guild}")
-	    return "done"
-	@commands.command(name="Announce",AdminsOnly = True)
 
-	async def announce(self, ctx,*,message):	
-		self.announsment = []
-		for channel in ctx.Guild.channels:
-			if channel.isinstance(channel, nextcord.announcementchanel):
-				self.announsment.append(channel)
-		self.channel = ctx.bot.get_channel(self.announsment[1].id)
-		await self.channel.send(f"@everyone {message}")
+class Command(commands.Cog, name="normal commands"):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command(name="ping")
+    async def ping(self, ctx):
+        self.ctx = ctx
+        await self.ctx.send(f"The Bots Ping is {round(ctx.bot.latency,1)}, The server name is {ctx.guild}")
+        return "done"
+
+    @commands.command(name="Announce", AdminsOnly=True)
+    async def announce(self, ctx, *, message):
+        self.announsment = []
+        for channel in ctx.Guild.channels:
+            if channel.isinstance(channel, nextcord.announcementchanel):
+                self.announsment.append(channel)
+        self.channel = ctx.bot.get_channel(self.announsment[1].id)
+        await self.channel.send(f"@everyone {message}")
 
 
 class DevCommands(commands.Cog, name='Developer Commands'):
@@ -103,29 +106,33 @@ class DevCommands(commands.Cog, name='Developer Commands'):
 
     @commands.command(name="say")
     async def say(self, ctx, *, message):
-        
+
         self.ctx = ctx
         self.message = message
         await ctx.message.delete()
         await self.ctx.send(message)
+
+
 class fun(commands.Cog, name='Commands that are fun'):
     def __init__(self, bot):
-    	self.bot = bot
+        self.bot = bot
 
-   
-    @commands.command(name = "Meme",pass_context=True)
-    async def meme(self,ctx):
+    @commands.command(name="Meme", pass_context=True)
+    async def meme(self, ctx):
         embed = Embed(title="", description="")
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                 res = await r.json()
-                embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+                embed.set_image(url=res['data']['children']
+                                [random.randint(0, 25)]['data']['url'])
                 await ctx.send(embed=embed)
-    @commands.command(name = "randomNum")
-    async def RadomNum(self,ctx):
-        await ctx.send(random.randint(1,10000))
-    @commands.command(name="Guess",pass_context=True)
-    async def command(self,ctx):
+
+    @commands.command(name="randomNum")
+    async def RadomNum(self, ctx):
+        await ctx.send(random.randint(1, 10000))
+
+    @commands.command(name="Guess", pass_context=True)
+    async def command(self, ctx):
         computer = random.randint(1, 10)
         await ctx.send('Guess my number , 1 to 10')
 
@@ -138,69 +145,19 @@ class fun(commands.Cog, name='Commands that are fun'):
             await ctx.send("Correct")
         else:
             await ctx.send(f"Nope it was {computer}")
-class Econemy(commands.Cog, name='Econemy commands'):
-		@commands.command()
-		async def balance(self,ctx):
-			await self.open_account(ctx.author)
 
-			user = ctx.author
-
-			users = await self.get_bank_data()
-		
-			wallet_amt= users[str(user.id)]["Wallet"]
-			bank_amt= users[str(user.id)]["Bank"]
-
-
-			em = nextcord.Embed(title=f"{ctx.author.name}'s balance.", color=nextcord.Color.teal()) 
-			em.add_field(
-				name="Wallet Balance",value=wallet_amt
-			)
-			em.add_field(
-				name="Bank Balance",value=bank_amt
-			)
-			await ctx.send(embed=em)
-
-		async def open_account(self,user):
-			users = await self.get_bank_data()
-		
-			if str(user.id) in users:
-				return False
-			else:
-				users[str(user.id)] = {}
-				users[str(user.id)]["Wallet"] = 0
-				users[str(user.id)]["Bank"] = 0
-		
-			with open("bank.json",'w') as f:
-				users = json.dump(users,f)
-			return True
-
-		async def get_bank_data(self):
-				with open("bank.json",'r') as f:
-					users = json.load(f)
-				return users
-
-		@commands.command()
-		async def beg(self,ctx):
-			await self.open_account(ctx.author)
-
-			user = ctx.author
-
-
-			users = await self.get_bank_data()
-
-			earnings = random.randrange(101)
-			await ctx.send(f"Someone gave your {earnings} coins")
-
-			users[str(user.id)]["Wallet"] += earnings
-
-			with open("bank.json",'w') as f:
-				users = json.dump(users,f)
-
-
+    @commands.command('rank')
+    async def rank(ctx, member: nextcord.member = None):
+        with open() as users:
+            if member == None:
+                userlvl = users[f'{ctx.author.id}']['level']
+                await ctx.send(f'{ctx.author.mention} You are at level {userlvl}!')
+            else:
+                userlvl2 = users[f'{member.id}']['level']
+                await ctx.send(f'{member.mention} is at level {userlvl2}!')
 
 def setup(bot):
-    
-	bot.add_cog(Command(bot))
-	bot.add_cog(DevCommands(bot))
-	bot.add_cog(fun(bot))
-	bot.add_cog(Econemy(bot))
+
+    bot.add_cog(Command(bot))
+    bot.add_cog(DevCommands(bot))
+    bot.add_cog(fun(bot))
