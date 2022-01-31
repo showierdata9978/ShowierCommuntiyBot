@@ -147,14 +147,15 @@ class fun(commands.Cog, name='Commands that are fun'):
             await ctx.send(f"Nope it was {computer}")
 
     @commands.command('rank')
-    async def rank(ctx, member: nextcord.member = None):
-        with open() as users:
+    async def rank(self,ctx, member: nextcord.member = None):
+        with open('users.json','r') as users:
+            users = json.loads(users)
             if member == None:
                 userlvl = users[f'{ctx.author.id}']['level']
                 await ctx.send(f'{ctx.author.mention} You are at level {userlvl}!')
             else:
-                userlvl2 = users[f'{member.id}']['level']
-                await ctx.send(f'{member.mention} is at level {userlvl2}!')
+                userlvl2 = users[f'{ctx.author.id}']['level']
+                await ctx.send(f'{ctx.author.mention} is at level {userlvl2}!')
 
 def setup(bot):
 

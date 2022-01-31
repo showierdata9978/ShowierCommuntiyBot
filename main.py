@@ -1,7 +1,7 @@
-import imp
+
 import os
 import random
-from re import I
+
 
 from click import command
 from keep_alive import keep_alive
@@ -11,8 +11,8 @@ import logging
 import asyncio
 import time
 import json
-from cogs.leveling.levelingfunc import add_experience,level_up
-
+from cogs.levling.levelingfunc import add_experience,level_up
+from dotenv import load_dotenv
 def Logs():
     global log_name
     global logger
@@ -82,13 +82,14 @@ async def on_message(message):
     if message.author.bot == False:
         with open('users.json', 'r') as f:
             users = json.load(f)
-        await add_experience(users, message.author)
+        await add_experience(users, message.author,random.randint(1,5))
         await level_up(users, message.author, message)
         with open('users.json', 'w') as f:
             json.dump(users, f)
             await bot.process_commands(message)
-
-
+@bot.event
+async def on_command_error(ctx, error):
+    await ctx.send(error)
 
 @bot.event
 async def guild_available():
@@ -108,8 +109,10 @@ token = ''
 
 
 # Starts the bot
-def runbot(token):
+def runbot():
+    load_dotenv()
+    token = os.environ.get('token')
     bot.run(token)  # Starts the bot
 
 
-runbot(token)
+runbot()

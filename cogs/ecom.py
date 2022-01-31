@@ -14,16 +14,17 @@ import random
 ####################################################################
 ####################################################################
 # Main code starts :)
-class Ecom(commands.cog,name="ecom reborn"):
-    def __init__(self) -> None:
+class Ecom(commands.Cog,name="ecom reborn"):
+    def __init__(self,bot:commands.Bot) -> None:
        self.mainshop = [{"name":"Watch","price":100,"description":"Time"},
                 {"name":"Laptop","price":1000,"description":"Work"},
                 {"name":"PC","price":10000,"description":"Gaming"},
                 {"name":"Ferrari","price":99999,"description":"Sports Car"}]
+       self.bot = bot
 
     @commands.command(aliases=['bal'])
     async def balance(self,ctx):
-        await self.self.open_account(Interaction.author)
+        await self.self.open_account(ctx.author)
         user = ctx.author
 
         users = await self.self.get_bank_data()
@@ -31,21 +32,21 @@ class Ecom(commands.cog,name="ecom reborn"):
         wallet_amt = users[str(user.id)]["wallet"]
         bank_amt = users[str(user.id)]["bank"]
 
-        em = discord.Embed(title=f'{interaction.author.name} Balance',color = discord.Color.red())
+        em = discord.Embed(title=f'{ctx.author.name} Balance',color = discord.Color.red())
         em.add_field(name="Wallet Balance", value=wallet_amt)
         em.add_field(name='Bank Balance',value=bank_amt)
         await ctx.reply(embed= em)
 
     @commands.command()
     async def beg(self,ctx):
-        await self.self.open_account(interaction.author)
-        user = interaction.author
+        await self.self.open_account(ctx.author)
+        user = ctx.author
 
         users = await self.self.get_bank_data()
 
         earnings = random.randrange(101)
 
-        await interaction.response.send_message(f'{ctx.author.mention} Got {earnings} coins!!')
+        await ctx.send(f'{ctx.author.mention} Got {earnings} coins!!')
 
         users[str(user.id)]["wallet"] += earnings
 
@@ -54,26 +55,26 @@ class Ecom(commands.cog,name="ecom reborn"):
 
 
     @commands.command(aliases=['wd'])
-    async def withdraw(self,interaction,amount = None):
-        await self.self.open_account(interaction.author)
+    async def withdraw(self,ctx,amount = None):
+        await self.self.open_account(ctx.author)
         if amount == None:
-            await interaction.response.send_message("Please enter the amount")
+            await ctx.send("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(interaction.author)
+        bal = await self.self.update_bank(ctx.author)
 
         amount = int(amount)
 
         if amount > bal[1]:
-            await interaction.response.send_message('You do not have sufficient balance')
+            await ctx.send('You do not have sufficient balance')
             return
         if amount < 0:
-            await interaction.response.send_message('Amount must be positive!')
+            await ctx.send('Amount must be positive!')
             return
 
-        await self.self.update_bank(interaction.author,amount)
-        await self.self.update_bank(interaction.author,-1*amount,'bank')
-        await interaction.response.send_message(f'{interaction.author.mention} You withdrew {amount} coins')
+        await self.self.update_bank(ctx.author,amount)
+        await self.self.update_bank(ctx.author,-1*amount,'bank')
+        await ctx.send(f'{ctx.author.mention} You withdrew {amount} coins')
 
 
     @commands.command(aliases=['dp'])
@@ -94,9 +95,9 @@ class Ecom(commands.cog,name="ecom reborn"):
             await ctx.reply('Amount must be positive!')
             return
 
-        await self.update_bank(interaction.author,-1*amount)
-        await self.self.update_bank(interaction.author,amount,'bank')
-        await ctx.reply(f'{interaction.author.mention} You deposited {amount} coins')
+        await self.update_bank(ctx.author,-1*amount)
+        await self.self.update_bank(ctx.author,amount,'bank')
+        await ctx.reply(f'{ctx.author.mention} You deposited {amount} coins')
 
 
     @commands.command(aliases=['sm'])
@@ -107,7 +108,7 @@ class Ecom(commands.cog,name="ecom reborn"):
             await ctx.reply("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(interaction.author)
+        bal = await self.self.update_bank(ctx.author)
         if amount == 'all':
             amount = bal[0]
 
@@ -117,48 +118,48 @@ class Ecom(commands.cog,name="ecom reborn"):
             await ctx.reply('You do not have sufficient balance')
             return
         if amount < 0:
-            await interaction.response.send_message('Amount must be positive!')
+            await ctx.send('Amount must be positive!')
             return
 
-        await self.self.update_bank(interaction.author,-1*amount,'bank')
+        await self.self.update_bank(ctx.author,-1*amount,'bank')
         await self.self.update_bank(member,amount,'bank')
-        await interaction.response.send_message(f'{interaction.author.mention} You gave {member} {amount} coins')
+        await ctx.send(f'{ctx.author.mention} You gave {member} {amount} coins')
 
 
     @commands.command(aliases=['rb'])
-    async def rob(self,interaction,member : discord.Member):
-        await self.self.open_account(interaction.author)
+    async def rob(self,ctx,member : discord.Member):
+        await self.self.open_account(ctx.author)
         await self.self.open_account(member)
         bal = await self.self.update_bank(member)
 
 
         if bal[0]<100:
-            await interaction.response.send_message('It is useless to rob him :(')
+            await ctx.send('It is useless to rob him :(')
             return
 
         earning = random.randrange(0,bal[0])
 
-        await self.self.update_bank(interaction.author,earning)
+        await self.self.update_bank(ctx.author,earning)
         await self.self.update_bank(member,-1*earning)
-        await interaction.response.send_message(f'{interaction.author.mention} You robbed {member} and got {earning} coins')
+        await ctx.send(f'{ctx.author.mention} You robbed {member} and got {earning} coins')
 
 
     @commands.command()
-    async def slots(self,interaction,amount = None):
-        await self.self.open_account(interaction.author)
+    async def slots(self,ctx,amount = None):
+        await self.self.open_account(ctx.author)
         if amount == None:
-            await interaction.response.send_message("Please enter the amount")
+            await ctx.send("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(interaction.author)
+        bal = await self.self.update_bank(ctx.author)
 
         amount = int(amount)
 
         if amount > bal[0]:
-            await interaction.response.send_message('You do not have sufficient balance')
+            await ctx.send('You do not have sufficient balance')
             return
         if amount < 0:
-            await interaction.response.send_message('Amount must be positive!')
+            await ctx.send('Amount must be positive!')
             return
         final = []
         for i in range(3):
@@ -166,18 +167,18 @@ class Ecom(commands.cog,name="ecom reborn"):
 
             final.append(a)
 
-        await interaction.response.send_message(str(final))
+        await ctx.send(str(final))
 
         if final[0] == final[1] or final[1] == final[2] or final[0] == final[2]:
-            await self.self.update_bank(interaction.author,2*amount)
-            await interaction.response.send_message(f'You won :) {interaction.author.mention}')
+            await self.self.update_bank(ctx.author,2*amount)
+            await ctx.send(f'You won :) {ctx.author.mention}')
         else:
-            await self.self.update_bank(interaction.author,-1*amount)
-            await interaction.response.send_message(f'You lose :( {interaction.author.mention}')
+            await self.self.update_bank(ctx.author,-1*amount)
+            await ctx.send(f'You lose :( {ctx.author.mention}')
 
 
     @commands.command()
-    async def shop(self,interaction:Interaction):
+    async def shop(self,ctx):
         em = discord.Embed(title = "Shop")
 
         for item in self.mainshop:
@@ -186,32 +187,32 @@ class Ecom(commands.cog,name="ecom reborn"):
             desc = item["description"]
             em.add_field(name = name, value = f"${price} | {desc}")
 
-        await interaction.response.send_message(embed = em)
+        await ctx.send(embed = em)
 
 
 
     @commands.command()
-    async def buy(self,interaction,item,amount = 1):
-        await self.open_account(interaction.author)
+    async def buy(self,ctx,item,amount = 1):
+        await self.open_account(ctx.author)
 
-        res = await self.buy_this(interaction.author,item,amount)
+        res = await self.buy_this(ctx.author,item,amount)
 
         if not res[0]:
             if res[1]==1:
-                await interaction.response.send_message("That Object isn't there!")
+                await ctx.send("That Object isn't there!")
                 return
             if res[1]==2:
-                await interaction.response.send_message(f"You don't have enough money in your wallet to buy {amount} {item}")
+                await ctx.send(f"You don't have enough money in your wallet to buy {amount} {item}")
                 return
 
 
-        await interaction.response.send_message(f"You just bought {amount} {item}")
+        await ctx.send(f"You just bought {amount} {item}")
 
 
     @commands.command()
-    async def bag(self,interaction:Interaction):
-        await self.open_account(interaction.author)
-        user = interaction.author
+    async def bag(self,ctx):
+        await self.open_account(ctx.author)
+        user = ctx.author
         users = await self.get_bank_data()
 
         try:
@@ -227,7 +228,7 @@ class Ecom(commands.cog,name="ecom reborn"):
 
             em.add_field(name = name, value = amount)    
 
-        await interaction.response.send_message(embed = em)
+        await ctx.send(embed = em)
 
 
     async def buy_this(self,user,item_name,amount):
@@ -281,23 +282,23 @@ class Ecom(commands.cog,name="ecom reborn"):
 
 
     @commands.command()
-    async def sell(self,interaction,item,amount = 1):
-        await self.open_account(interaction.author)
+    async def sell(self,ctx,item,amount = 1):
+        await self.open_account(ctx.author)
 
-        res = await self.update_bank(interaction.author,item,amount)
+        res = await self.update_bank(ctx.author,item,amount)
 
         if not res[0]:
             if res[1]==1:
-                await interaction.response.send_message("That Object isn't there!")
+                await ctx.send("That Object isn't there!")
                 return
             if res[1]==2:
-                await interaction.response.send_message(f"You don't have {amount} {item} in your bag.")
+                await ctx.send(f"You don't have {amount} {item} in your bag.")
                 return
             if res[1]==3:
-                await interaction.response.send_message(f"You don't have {item} in your bag.")
+                await ctx.send(f"You don't have {item} in your bag.")
                 return
 
-        await interaction.response.send_message(f"You just sold {amount} {item}.")
+        await ctx.send(f"You just sold {amount} {item}.")
 
     async def update_bank(self,user,item_name,amount,price = None):
         item_name = item_name.lower()
@@ -348,7 +349,7 @@ class Ecom(commands.cog,name="ecom reborn"):
 
 
     @commands.command(aliases = ["lb"])
-    async def leaderboard(self,interaction,x = 1):
+    async def leaderboard(self,ctx,x = 1):
         users = await self.get_bank_data()
         leader_board = {}
         total = []
@@ -372,7 +373,7 @@ class Ecom(commands.cog,name="ecom reborn"):
             else:
                 index += 1
 
-        await interaction.response.send_message(embed = em)
+        await ctx.send(embed = em)
 
 
     async def open_account(self,user):

@@ -1,0 +1,8 @@
+2022-01-30 16:07:34,856:WARNING:nextcord.client: PyNaCl is not installed, voice will NOT be supported
+2022-01-30 16:07:34,857:DEBUG:nextcord.client: on_ready has successfully been registered as an event
+2022-01-30 16:07:34,858:DEBUG:nextcord.client: on_member_join has successfully been registered as an event
+2022-01-30 16:07:34,858:DEBUG:nextcord.client: on_message has successfully been registered as an event
+2022-01-30 16:07:34,858:DEBUG:nextcord.client: guild_available has successfully been registered as an event
+2022-01-30 16:07:34,873:INFO:nextcord.client: logging in using static token
+2022-01-30 16:07:34,875:INFO:nextcord.client: Cleaning up tasks.
+2022-01-30 16:07:34,876:INFO:nextcord.client: Closing the event loop.
