@@ -6,7 +6,8 @@ import sys
 import random
 import nextcord
 import json
-
+import datetime
+import time
 
 class Command(commands.Cog, name="normal commands"):
     def __init__(self, bot):
@@ -149,14 +150,33 @@ class fun(commands.Cog, name='Commands that are fun'):
     @commands.command('rank')
     async def rank(self,ctx, member: nextcord.member = None):
         with open('users.json','r') as users:
-            users = json.loads(users)
+            users = json.load(users)
             if member == None:
                 userlvl = users[f'{ctx.author.id}']['level']
                 await ctx.send(f'{ctx.author.mention} You are at level {userlvl}!')
             else:
                 userlvl2 = users[f'{ctx.author.id}']['level']
                 await ctx.send(f'{ctx.author.mention} is at level {userlvl2}!')
+    
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print(f'{self} has been loaded') 
+        global startTime 
+        startTime = time.time()
 
+    #create a command in the cog
+    @commands.command(name='Uptime')
+    async def _uptime(self,ctx):
+
+        # what this is doing is creating a variable called 'uptime' and assigning it
+        # a string value based off calling a time.time() snapshot now, and subtracting
+        # the global from earlier
+        uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
+        await ctx.send(uptime)
+
+    @commands.command('30day')
+    async def q30day(self,ctx):
+        await ctx.send('You GOT IT')
 def setup(bot):
 
     bot.add_cog(Command(bot))

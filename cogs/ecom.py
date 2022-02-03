@@ -24,10 +24,10 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
     @commands.command(aliases=['bal'])
     async def balance(self,ctx):
-        await self.self.open_account(ctx.author)
+        await self.open_account(ctx.author)
         user = ctx.author
 
-        users = await self.self.get_bank_data()
+        users = await self.get_bank_data()
 
         wallet_amt = users[str(user.id)]["wallet"]
         bank_amt = users[str(user.id)]["bank"]
@@ -38,11 +38,12 @@ class Ecom(commands.Cog,name="ecom reborn"):
         await ctx.reply(embed= em)
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def beg(self,ctx):
-        await self.self.open_account(ctx.author)
+        await self.open_account(ctx.author)
         user = ctx.author
 
-        users = await self.self.get_bank_data()
+        users = await self.get_bank_data()
 
         earnings = random.randrange(101)
 
@@ -55,13 +56,14 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
 
     @commands.command(aliases=['wd'])
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def withdraw(self,ctx,amount = None):
-        await self.self.open_account(ctx.author)
+        await self.open_account(ctx.author)
         if amount == None:
             await ctx.send("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(ctx.author)
+        bal = await self.update_bank(ctx.author)
 
         amount = int(amount)
 
@@ -72,19 +74,20 @@ class Ecom(commands.Cog,name="ecom reborn"):
             await ctx.send('Amount must be positive!')
             return
 
-        await self.self.update_bank(ctx.author,amount)
-        await self.self.update_bank(ctx.author,-1*amount,'bank')
+        await self.update_bank(ctx.author,amount)
+        await self.update_bank(ctx.author,-1*amount,'bank')
         await ctx.send(f'{ctx.author.mention} You withdrew {amount} coins')
 
 
     @commands.command(aliases=['dp'])
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def deposit(self,ctx,amount = None):
-        await self.self.open_account(ctx.author)
+        await self.open_account(ctx.author)
         if amount == None:
             await ctx.reply("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(ctx.author)
+        bal = await self.update_bank(ctx.author)
 
         amount = int(amount)
 
@@ -96,7 +99,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
             return
 
         await self.update_bank(ctx.author,-1*amount)
-        await self.self.update_bank(ctx.author,amount,'bank')
+        await self.update_bank(ctx.author,amount,'bank')
         await ctx.reply(f'{ctx.author.mention} You deposited {amount} coins')
 
 
@@ -108,7 +111,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
             await ctx.reply("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(ctx.author)
+        bal = await self.update_bank(ctx.author)
         if amount == 'all':
             amount = bal[0]
 
@@ -121,16 +124,16 @@ class Ecom(commands.Cog,name="ecom reborn"):
             await ctx.send('Amount must be positive!')
             return
 
-        await self.self.update_bank(ctx.author,-1*amount,'bank')
-        await self.self.update_bank(member,amount,'bank')
+        await self.update_bank(ctx.author,-1*amount,'bank')
+        await self.update_bank(member,amount,'bank')
         await ctx.send(f'{ctx.author.mention} You gave {member} {amount} coins')
 
-
+    @commands.cooldown(1, 100000, commands.BucketType.user)
     @commands.command(aliases=['rb'])
     async def rob(self,ctx,member : discord.Member):
-        await self.self.open_account(ctx.author)
-        await self.self.open_account(member)
-        bal = await self.self.update_bank(member)
+        await self.open_account(ctx.author)
+        await self.open_account(member)
+        bal = await self.update_bank(member)
 
 
         if bal[0]<100:
@@ -139,19 +142,20 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
         earning = random.randrange(0,bal[0])
 
-        await self.self.update_bank(ctx.author,earning)
-        await self.self.update_bank(member,-1*earning)
+        await self.update_bank(ctx.author,earning)
+        await self.update_bank(member,-1*earning)
         await ctx.send(f'{ctx.author.mention} You robbed {member} and got {earning} coins')
 
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def slots(self,ctx,amount = None):
-        await self.self.open_account(ctx.author)
+        await self.open_account(ctx.author)
         if amount == None:
             await ctx.send("Please enter the amount")
             return
 
-        bal = await self.self.update_bank(ctx.author)
+        bal = await self.update_bank(ctx.author)
 
         amount = int(amount)
 
@@ -170,14 +174,15 @@ class Ecom(commands.Cog,name="ecom reborn"):
         await ctx.send(str(final))
 
         if final[0] == final[1] or final[1] == final[2] or final[0] == final[2]:
-            await self.self.update_bank(ctx.author,2*amount)
+            await self.update_bank(ctx.author,2*amount)
             await ctx.send(f'You won :) {ctx.author.mention}')
         else:
-            await self.self.update_bank(ctx.author,-1*amount)
+            await self.update_bank(ctx.author,-1*amount)
             await ctx.send(f'You lose :( {ctx.author.mention}')
 
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def shop(self,ctx):
         em = discord.Embed(title = "Shop")
 
@@ -192,6 +197,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def buy(self,ctx,item,amount = 1):
         await self.open_account(ctx.author)
 
@@ -210,6 +216,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def bag(self,ctx):
         await self.open_account(ctx.author)
         user = ctx.author
@@ -282,6 +289,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
 
     @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def sell(self,ctx,item,amount = 1):
         await self.open_account(ctx.author)
 
@@ -349,6 +357,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
 
 
     @commands.command(aliases = ["lb"])
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def leaderboard(self,ctx,x = 1):
         users = await self.get_bank_data()
         leader_board = {}
@@ -365,7 +374,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
         index = 1
         for amt in total:
             id_ = leader_board[amt]
-            member = commands.get_user(id_)
+            member = ctx.server.get_member(id_)
             name = member.name
             em.add_field(name = f"{index}. {name}" , value = f"{amt}",  inline = False)
             if index == x:
@@ -393,7 +402,7 @@ class Ecom(commands.Cog,name="ecom reborn"):
         return True
 
 
-    async def get_bank_data():
+    async def get_bank_data(self):
         with open('mainbank.json','r') as f:
             users = json.load(f)
 

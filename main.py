@@ -11,7 +11,7 @@ import logging
 import asyncio
 import time
 import json
-from cogs.levling.levelingfunc import add_experience,level_up
+from cogs.levling.levelingfunc import add_experience,level_up,update_data
 from dotenv import load_dotenv
 def Logs():
     global log_name
@@ -82,6 +82,7 @@ async def on_message(message):
     if message.author.bot == False:
         with open('users.json', 'r') as f:
             users = json.load(f)
+        await update_data(users,message.author)
         await add_experience(users, message.author,random.randint(1,5))
         await level_up(users, message.author, message)
         with open('users.json', 'w') as f:
@@ -90,6 +91,8 @@ async def on_message(message):
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send(error)
+    print(ctx,error)
+    raise error
 
 @bot.event
 async def guild_available():
