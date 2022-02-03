@@ -75,19 +75,27 @@ async def logmsg(msg):
     except FileExistsError:
         with open(f'logs/msglogs/{log_name}', 'a') as f:
             f.write(f'Time:{time.time()} owner: {msg.author} MSG:{msgt}\n')
-
+def Banned(member):
+    with open('banned.txt','r') as f:
+        lines = f.readlines()
+    for line in lines:
+        if member.id == line.strip('\n'):
+            return True
+    return False
+            
 
 @bot.event
 async def on_message(message):
     if message.author.bot == False:
-        with open('users.json', 'r') as f:
-            users = json.load(f)
-        await update_data(users,message.author)
-        await add_experience(users, message.author,random.randint(1,5))
-        await level_up(users, message.author, message)
-        with open('users.json', 'w') as f:
-            json.dump(users, f)
-            await bot.process_commands(message)
+        if not Banned(message.author):
+            with open('users.json', 'r') as f:
+                users = json.load(f)
+            await update_data(users,message.author)
+            await add_experience(users, message.author,random.randint(1,5))
+            await level_up(users, message.author, message)
+            with open('users.json', 'w') as f:
+                json.dump(users, f)
+                await bot.process_commands(message)
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send(error)

@@ -1,5 +1,0 @@
-2022-01-30 15:50:50,662:WARNING:nextcord.client: PyNaCl is not installed, voice will NOT be supported
-2022-01-30 15:50:50,663:DEBUG:nextcord.client: on_ready has successfully been registered as an event
-2022-01-30 15:50:50,664:DEBUG:nextcord.client: on_member_join has successfully been registered as an event
-2022-01-30 15:50:50,664:DEBUG:nextcord.client: on_message has successfully been registered as an event
-2022-01-30 15:50:50,664:DEBUG:nextcord.client: guild_available has successfully been registered as an event

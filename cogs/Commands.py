@@ -112,7 +112,22 @@ class DevCommands(commands.Cog, name='Developer Commands'):
         self.message = message
         await ctx.message.delete()
         await self.ctx.send(message)
+    @commands.command(name='ban')
+    async def ban(self,ctx,*,Memeber:nextcord.member):
+        with open('banned.txt','a') as f:
+            f.write(Memeber.id)
+    @commands.command('unban')
+    async def unban(self,ctx,*,member):
+        with open("banned.txt", 'r') as file:
+            lines = file.readlines()
 
+        # delete matching content
+        content = member.id
+        with open("banned.txt", 'a') as file:
+            for line in lines:
+                # readlines() includes a newline character
+                if line.strip("\n") != content:
+                    file.write(line)
 
 class fun(commands.Cog, name='Commands that are fun'):
     def __init__(self, bot):
