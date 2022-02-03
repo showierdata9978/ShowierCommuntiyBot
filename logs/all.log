@@ -575,3 +575,45 @@
 2022-02-03 13:42:27,424:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 2022-02-03 13:43:08,606:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 55.
 2022-02-03 13:43:08,681:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:43:49,860:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 55.
+2022-02-03 13:43:49,925:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:44:31,113:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 55.
+2022-02-03 13:44:31,191:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:44:35,952:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'CHANNEL_CREATE', 's': 56, 'op': 0, 'd': {'type': 4, 'position': 5, 'permission_overwrites': [{'type': 0, 'id': '936395663355306004', 'deny': '1024', 'allow': '0'}], 'parent_id': None, 'nsfw': False, 'name': 'Dev Zone', 'id': '938882685554786384', 'guild_id': '936395663355306004', 'guild_hashes': {'version': 1, 'roles': {'hash': 'YslMNkhx2dg'}, 'metadata': {'hash': '1BKsgyXZLVo'}, 'channels': {'hash': '2Yy/Zz5HXaA'}}}}
+2022-02-03 13:44:35,957:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:44:35,958:DEBUG:nextcord.client: Dispatching event guild_channel_create
+2022-02-03 13:45:00,459:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'CHANNEL_CREATE', 's': 57, 'op': 0, 'd': {'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 23, 'permission_overwrites': [{'type': 0, 'id': '936395663355306004', 'deny': '1024', 'allow': '0'}], 'parent_id': '938882685554786384', 'nsfw': False, 'name': 'bot-updates', 'last_message_id': None, 'id': '938882788587896832', 'guild_id': '936395663355306004', 'guild_hashes': {'version': 1, 'roles': {'hash': 'YslMNkhx2dg'}, 'metadata': {'hash': '1BKsgyXZLVo'}, 'channels': {'hash': 'WZXjCie1lhU'}}}}
+2022-02-03 13:45:00,459:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:45:00,460:DEBUG:nextcord.client: Dispatching event guild_channel_create
+2022-02-03 13:45:12,366:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 57.
+2022-02-03 13:45:12,440:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:45:17,937:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'CHANNEL_UPDATE', 's': 58, 'op': 0, 'd': {'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 23, 'permission_overwrites': [{'type': 0, 'id': '936395663355306004', 'deny': '3072', 'allow': '0'}], 'parent_id': '938882685554786384', 'nsfw': False, 'name': 'bot-updates', 'last_message_id': None, 'id': '938882788587896832', 'guild_id': '936395663355306004', 'guild_hashes': {'version': 1, 'roles': {'hash': 'YslMNkhx2dg'}, 'metadata': {'hash': '1BKsgyXZLVo'}, 'channels': {'hash': 'FmeQfVWDIbM'}}}}
+2022-02-03 13:45:17,944:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:45:17,944:DEBUG:nextcord.client: Dispatching event guild_channel_update
+2022-02-03 13:45:53,619:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 58.
+2022-02-03 13:45:53,687:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:46:34,870:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 58.
+2022-02-03 13:46:34,949:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:47:16,122:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 58.
+2022-02-03 13:47:16,188:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:47:16,403:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'INTEGRATION_CREATE', 's': 59, 'op': 0, 'd': {'user': {'username': 'ShowierData9978', 'public_flags': 64, 'id': '893981911003836487', 'discriminator': '3454', 'avatar': '42e2bffdc8635938782a4a651012cdfe'}, 'type': 'discord', 'name': 'GitHub', 'id': '938883358778351656', 'guild_hashes': {'version': 1, 'roles': {'hash': 'YslMNkhx2dg'}, 'metadata': {'hash': '1BKsgyXZLVo'}, 'channels': {'hash': 'FmeQfVWDIbM'}}, 'enabled': True, 'application': {'type': None, 'summary': '', 'name': 'GitHub', 'id': '193000403632128013', 'icon': 'cf4b127b34bf32151ef7f14e00a84a87', 'description': '', 'bot': {'username': 'GitHub', 'public_flags': 65536, 'id': '193000443981463552', 'discriminator': '4582', 'bot': True, 'avatar': 'f05634a1a65aa5c92fb11ca5b3214825'}}, 'account': {'name': 'GitHub', 'id': '193000403632128013'}, 'guild_id': '936395663355306004'}}
+2022-02-03 13:47:16,403:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:47:16,404:DEBUG:nextcord.client: Dispatching event integration_create
+2022-02-03 13:47:16,411:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'GUILD_ROLE_CREATE', 's': 60, 'op': 0, 'd': {'role': {'unicode_emoji': None, 'tags': {'bot_id': '193000443981463552'}, 'position': 1, 'permissions': '18432', 'name': 'GitHub', 'mentionable': False, 'managed': True, 'id': '938883358778351657', 'icon': None, 'hoist': False, 'color': 0}, 'guild_id': '936395663355306004', 'guild_hashes': {'version': 1, 'roles': {'hash': '4QyP7fmFSHc'}, 'metadata': {'hash': '1BKsgyXZLVo'}, 'channels': {'hash': 'FmeQfVWDIbM'}}}}
+2022-02-03 13:47:16,412:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:47:16,412:DEBUG:nextcord.client: Dispatching event guild_role_create
+2022-02-03 13:47:57,374:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 60.
+2022-02-03 13:47:57,448:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:48:13,488:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'TYPING_START', 's': 61, 'op': 0, 'd': {'user_id': '888801208305868811', 'timestamp': 1643917693, 'member': {'user': {'username': 'ILikeBaconHairs', 'id': '888801208305868811', 'discriminator': '8223', 'avatar': 'ff21bcfad9c9fca5eb7dbd984c84b220'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-01-29T19:00:07.174493+00:00', 'hoisted_role': None, 'deaf': False, 'communication_disabled_until': None, 'avatar': None}, 'channel_id': '937082956806254612', 'guild_id': '936395663355306004'}}
+2022-02-03 13:48:13,488:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:48:13,489:DEBUG:nextcord.client: Dispatching event raw_typing
+2022-02-03 13:48:13,489:DEBUG:nextcord.client: Dispatching event typing
+2022-02-03 13:48:15,828:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'VOICE_STATE_UPDATE', 's': 62, 'op': 0, 'd': {'member': {'user': {'username': 'ILikeBaconHairs', 'id': '888801208305868811', 'discriminator': '8223', 'avatar': 'ff21bcfad9c9fca5eb7dbd984c84b220'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-01-29T19:00:07.174493+00:00', 'hoisted_role': None, 'deaf': False, 'communication_disabled_until': None, 'avatar': None}, 'user_id': '888801208305868811', 'suppress': True, 'session_id': '62b4dedd879762ce6066255b2c220a35', 'self_video': False, 'self_mute': True, 'self_deaf': False, 'request_to_speak_timestamp': None, 'mute': False, 'guild_id': '936395663355306004', 'deaf': False, 'channel_id': '937082952096038972'}}
+2022-02-03 13:48:15,828:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-03 13:48:15,829:DEBUG:nextcord.client: Dispatching event voice_state_update
+2022-02-03 13:48:38,626:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 62.
+2022-02-03 13:48:38,830:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:49:19,879:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 62.
+2022-02-03 13:49:19,950:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-03 13:50:01,132:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 62.
+2022-02-03 13:50:01,198:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
