@@ -38,7 +38,7 @@ def Logs():
 
 Logs()
 bot = commands.Bot(
-    command_prefix="Two!",  # Change to desired prefix
+    command_prefix="Data!",  # Change to desired prefix
     case_insensitive=True,  # Commands aren't case-sensitive
 )
 loop = asyncio.get_event_loop()
