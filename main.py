@@ -3,14 +3,14 @@ import os
 import random
 
 
-from click import command
-from keep_alive import keep_alive
+
+
 from nextcord.ext import commands
 import nextcord
 import logging
 import asyncio
 import time
-import json
+import update
 from cogs.levling.levelingfunc import add_experience,level_up,update_data
 from dotenv import load_dotenv
 def Logs():
@@ -115,8 +115,8 @@ if __name__ == '__main__':  # Ensures this is the file being ran
     for extension in extensions:
         bot.load_extension(extension)  # Loades every extension.
 
-keep_alive()  # Starts a webserver to be pinged.
-token = ''
+ # Starts a webserver to be pinged.
+
 
 
 # Starts the bot
