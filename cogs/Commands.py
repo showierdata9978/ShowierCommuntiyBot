@@ -178,7 +178,7 @@ class fun(commands.Cog, name="Commands that are fun"):
     async def rank(self, ctx, member: nextcord.member = None):
         with open("users.json", "r") as users:
             users = json.load(users)
-            if member == None:
+            if member is None:
                 userlvl = users[f"{ctx.author.id}"]["level"]
                 await ctx.send(f"{ctx.author.mention} You are at level {userlvl}!")
             else:

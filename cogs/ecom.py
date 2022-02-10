@@ -58,7 +58,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def withdraw(self, ctx, amount=None):
         await self.open_account(ctx.author)
-        if amount == None:
+        if amount is None:
             await ctx.send("Please enter the amount")
             return
 
@@ -81,7 +81,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def deposit(self, ctx, amount=None):
         await self.open_account(ctx.author)
-        if amount == None:
+        if amount is None:
             await ctx.reply("Please enter the amount")
             return
 
@@ -104,7 +104,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
     async def send_message(self, ctx, member: discord.Member, amount=None):
         await self.open_account(ctx.author)
         await self.open_account(member)
-        if amount == None:
+        if amount is None:
             await ctx.reply("Please enter the amount")
             return
 
@@ -148,7 +148,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def slots(self, ctx, amount=None):
         await self.open_account(ctx.author)
-        if amount == None:
+        if amount is None:
             await ctx.send("Please enter the amount")
             return
 
@@ -240,7 +240,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
                 price = item["price"]
                 break
 
-        if name_ == None:
+        if name_ is None:
             return [False, 1]
 
         cost = price * amount
@@ -264,7 +264,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
                     t = 1
                     break
                 index += 1
-            if t == None:
+            if t is None:
                 obj = {"item": item_name, "amount": amount}
                 users[str(user.id)]["bag"].append(obj)
         except:
@@ -305,11 +305,11 @@ class Ecom(commands.Cog, name="ecom reborn"):
             name = item["name"].lower()
             if name == item_name:
                 name_ = name
-                if price == None:
+                if price is None:
                     price = 0.7 * item["price"]
                 break
 
-        if name_ == None:
+        if name_ is None:
             return [False, 1]
 
         cost = price * amount
@@ -332,7 +332,7 @@ class Ecom(commands.Cog, name="ecom reborn"):
                     t = 1
                     break
                 index += 1
-            if t == None:
+            if t is None:
                 return [False, 3]
         except:
             return [False, 3]
