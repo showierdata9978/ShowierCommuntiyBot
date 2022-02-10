@@ -90,7 +90,7 @@ def Banned(member):
 
 @bot.event
 async def on_message(message):
-    if message.author.bot == False:
+    if message.author.bot is False:
         if not Banned(message.author):
             with open("users.json", "r") as f:
                 users = json.load(f)
