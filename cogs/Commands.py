@@ -139,6 +139,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         for guild in activeservers:
             await ctx.send(guild.name)
             print(guild.name)
+
     @commands.command()
     async def banguild(self, ctx, guild_name):
         targetGuild = [guild for guild in self.bot.guilds if guild.name == guild_name]
