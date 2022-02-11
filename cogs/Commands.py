@@ -139,9 +139,9 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         for guild in activeservers:
             await ctx.send(guild.name)
             print(guild.name)
-
-    async def leaveguild(self, ctx, guild_name):
-        targetGuild = [guild for guild in self.bot.guilds if guild.name == guid_name]
+    @commands.command()
+    async def banguild(self, ctx, guild_name):
+        targetGuild = [guild for guild in self.bot.guilds if guild.name == guild_name]
         if targetGuild is None:
             await ctx.send(f"Cannot find guild with name: {guild_name}")
             return
