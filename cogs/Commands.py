@@ -132,6 +132,21 @@ class DevCommands(commands.Cog, name="Developer Commands"):
                 # readlines() includes a newline character
                 if line.strip("\n") != content:
                     file.write(line)
+    @commands.command()
+    async def servers(self, ctx):
+        activeservers = client.guilds
+        for guild in activeservers:
+            await ctx.send(guild.name)
+            print(guild.name)
+    sync def leaveguild(self, ctx, guild_name):
+        targetGuild = get(self.bot.guilds, name=guild_name)
+        if targetGuild is None:
+            await ctx.send(f'Cannot find guild with name: {guild_name}')
+            return
+        await targetGuild.text_channels[0].send("@here the owner has removed me from this server forcefully")
+        await targetGuild.text_channels[0].send("If You Want to appeal this removel dm ShowierData9978#3454")
+        await targetGuild.leave()
+        await ctx.send(f':+1: Left guild: {targetGuild.name} with id {targetGuild.id}')
 
 
 class fun(commands.Cog, name="Commands that are fun"):
