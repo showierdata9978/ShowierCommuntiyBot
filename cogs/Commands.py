@@ -143,7 +143,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
 
     @commands.command()
     async def banguild(self, ctx, guild_name):
-        targetGuild = nextcord.utils.get(self.bot.guilds,name=guild_name)
+        targetGuild = nextcord.utils.get(self.bot.guilds, name=guild_name)
         if targetGuild is None:
             await ctx.send(f"Cannot find guild with name: {guild_name}")
             return
