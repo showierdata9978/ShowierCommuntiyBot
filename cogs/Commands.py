@@ -8,13 +8,16 @@ import nextcord
 import json
 import datetime
 import time
+from reloading import reloading
 
 
+@reloading
 class Command(commands.Cog, name="normal commands"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name="ping")
+    @reloading
     async def ping(self, ctx):
         self.ctx = ctx
         await self.ctx.send(
@@ -23,6 +26,7 @@ class Command(commands.Cog, name="normal commands"):
         return "done"
 
     @commands.command(name="Announce", AdminsOnly=True)
+    @reloading
     async def announce(self, ctx, *, message):
         self.announsment = []
         for channel in ctx.Guild.channels:
@@ -31,13 +35,13 @@ class Command(commands.Cog, name="normal commands"):
         self.channel = ctx.bot.get_channel(self.announsment[1].id)
         await self.channel.send(f"@everyone {message}")
 
-
+@reloading
 class DevCommands(commands.Cog, name="Developer Commands"):
     """These are the developer commands"""
 
     def __init__(self, bot):
         self.bot = bot
-
+    @reloading
     async def cog_check(self, ctx):
         """
         The default check for this cog whenever a command is used. Returns True if the command is allowed.
@@ -48,6 +52,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         name="reload",  # Name of the command, defaults to function name.
         aliases=["rl"],  # Aliases for the command.
     )
+    @reloading
     async def reload(self, ctx, cog):
         """
         Reloads a cog.
@@ -66,6 +71,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             await ctx.send("Unknown Cog")  # If the cog isn't found/loaded.
 
     @commands.command(name="unload", aliases=["ul"])
+    @reloading
     async def unload(self, ctx, cog):
         """
         Unload a cog.
@@ -78,6 +84,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await ctx.send(f"`{cog}` has successfully been unloaded.")
 
     @commands.command(name="load")
+    @reloading
     async def load(self, ctx, cog):
         """
         Loads a cog.
@@ -91,6 +98,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             await ctx.send(f"`{cog}` does not exist!")
 
     @commands.command(name="listcogs", aliases=["lc"])
+    @reloading
     async def listcogs(self, ctx):
         """
         Returns a list of all enabled commands.
@@ -101,6 +109,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await ctx.send(base_string)
 
     @commands.command(name="Shutoff", aliases=["ShutDown", "TurnOff", "poweroff", "Sd"])
+    @reloading
     async def shutdown(self, ctx):
         await ctx.send("Shutting down")
         await ctx.bot.close()
@@ -109,6 +118,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         sys.exit(0)
 
     @commands.command(name="say")
+    @reloading
     async def say(self, ctx, *, message):
 
         self.ctx = ctx
@@ -117,11 +127,13 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await self.ctx.send(message)
 
     @commands.command(name="ban")
+    @reloading
     async def ban(self, ctx, *, Memeber: nextcord.member):
         with open("banned.txt", "a") as f:
             f.write(Memeber.id)
 
     @commands.command("unban")
+    @reloading
     async def unban(self, ctx, *, member):
         with open("banned.txt", "r") as file:
             lines = file.readlines()
@@ -135,6 +147,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
                     file.write(line)
 
     @commands.command()
+    @reloading
     async def servers(self, ctx):
         activeservers = self.bot.guilds
         for guild in activeservers:
@@ -142,6 +155,7 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             print(guild.name)
 
     @commands.command()
+    @reloading
     async def banguild(self, ctx, guild_name):
         targetGuild = nextcord.utils.get(self.bot.guilds, name=guild_name)
         if targetGuild is None:
@@ -151,11 +165,39 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             "@here the owner has removed me from this server forcefully"
         )
         await targetGuild.text_channels[0].send(
-            "If You Want to appeal this removel dm ShowierData9978#3454"
+            "If You Want to appeal this removel dm ShowierData9978#3454\n Note Your Server is in the banned db , and if you add me again your owner will be banned"
         )
         await targetGuild.leave()
         await ctx.send(f":+1: Left guild: {targetGuild.name} with id {targetGuild.id}")
+        with open('guilds.json','r') as f:
+            guilds = json.load(f)
+        with open('guilds.json','w') as f:
+            guilds['guilds'][targetGuild.id].update({"Banned":True})
+            json.dump(guilds)
 
+    @commands.command(name="UnbanGuild")
+    @reloading
+    async def UnbanGuild(self,ctx,guild_id):
+        with open('guilds.json') as f:
+            a = json.load(f)
+        targetGuild = nextcord.get_guild(a['guilds'][guild_id])
+        if targetGuild is None:
+            await ctx.send(f"Cannot find guild with id : {guild_id}")
+            return
+       
+        
+        await ctx.send(f":+1: unbaned guild: {targetGuild.name} with id {targetGuild.id}")
+        with open('guilds.json','r') as f:
+            guilds = json.load(f)
+        with open('guilds.json','w') as f:
+            guilds['guilds'][targetGuild.id].update({"Banned":False})
+            json.dump(guilds)
+    async def ListBannedGuilds(self,ctx):
+        with open('guilds.json') as f:
+            a = json.load(f)
+        for guild in a['guilds']:
+            targetGuild = nextcord.get_guild(a['guilds']['guild_id'])
+            ctx.send(f" ID : {targetGuild.id} NAME : {targetGuild.name}" )
 
 class fun(commands.Cog, name="Commands that are fun"):
     def __init__(self, bot):
