@@ -35,12 +35,14 @@ class Command(commands.Cog, name="normal commands"):
         self.channel = ctx.bot.get_channel(self.announsment[1].id)
         await self.channel.send(f"@everyone {message}")
 
+
 @reloading
 class DevCommands(commands.Cog, name="Developer Commands"):
     """These are the developer commands"""
 
     def __init__(self, bot):
         self.bot = bot
+
     @reloading
     async def cog_check(self, ctx):
         """
@@ -169,35 +171,38 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         )
         await targetGuild.leave()
         await ctx.send(f":+1: Left guild: {targetGuild.name} with id {targetGuild.id}")
-        with open('guilds.json','r') as f:
+        with open("guilds.json", "r") as f:
             guilds = json.load(f)
-        with open('guilds.json','w') as f:
-            guilds['guilds'][targetGuild.id].update({"Banned":True})
+        with open("guilds.json", "w") as f:
+            guilds["guilds"][targetGuild.id].update({"Banned": True})
             json.dump(guilds)
 
     @commands.command(name="UnbanGuild")
     @reloading
-    async def UnbanGuild(self,ctx,guild_id):
-        with open('guilds.json') as f:
+    async def UnbanGuild(self, ctx, guild_id):
+        with open("guilds.json") as f:
             a = json.load(f)
-        targetGuild = nextcord.get_guild(a['guilds'][guild_id])
+        targetGuild = nextcord.get_guild(a["guilds"][guild_id])
         if targetGuild is None:
             await ctx.send(f"Cannot find guild with id : {guild_id}")
             return
-       
-        
-        await ctx.send(f":+1: unbaned guild: {targetGuild.name} with id {targetGuild.id}")
-        with open('guilds.json','r') as f:
+
+        await ctx.send(
+            f":+1: unbaned guild: {targetGuild.name} with id {targetGuild.id}"
+        )
+        with open("guilds.json", "r") as f:
             guilds = json.load(f)
-        with open('guilds.json','w') as f:
-            guilds['guilds'][targetGuild.id].update({"Banned":False})
+        with open("guilds.json", "w") as f:
+            guilds["guilds"][targetGuild.id].update({"Banned": False})
             json.dump(guilds)
-    async def ListBannedGuilds(self,ctx):
-        with open('guilds.json') as f:
+
+    async def ListBannedGuilds(self, ctx):
+        with open("guilds.json") as f:
             a = json.load(f)
-        for guild in a['guilds']:
-            targetGuild = nextcord.get_guild(a['guilds']['guild_id'])
-            ctx.send(f" ID : {targetGuild.id} NAME : {targetGuild.name}" )
+        for guild in a["guilds"]:
+            targetGuild = nextcord.get_guild(a["guilds"]["guild_id"])
+            ctx.send(f" ID : {targetGuild.id} NAME : {targetGuild.name}")
+
 
 class fun(commands.Cog, name="Commands that are fun"):
     def __init__(self, bot):
