@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 
 from reloading import reloading
 
+
 def Logs():
     global log_name
     global logger
@@ -69,8 +70,7 @@ async def on_member_join(member):
     )
 
 
-
-def Banned(thing,type):
+def Banned(thing, type):
     if type == "member":
         with open("banned.txt", "r") as f:
             lines = f.readlines()
@@ -79,16 +79,17 @@ def Banned(thing,type):
                 return True
         return False
     elif type == "guild":
-        with open('guilds.json','r') as f:
+        with open("guilds.json", "r") as f:
             j = json.load(f)
-        if j['guilds'][thing.id]['banned']:
+        if j["guilds"][thing.id]["banned"]:
             return True
         return False
+
 
 @bot.event
 async def on_message(message):
     if message.author.bot is False:
-        if not Banned(message.author,'member'):
+        if not Banned(message.author, "member"):
             with open("users.json", "r") as f:
                 users = json.load(f)
             await update_data(users, message.author)
@@ -102,7 +103,7 @@ async def on_message(message):
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send(error)
-    print(ctx,"\n\n", error)
+    print(ctx, "\n\n", error)
     raise error
 
 
@@ -115,12 +116,14 @@ async def guild_available():
     await channel.send("@everyone Showier Is working on the bot :D do Two!help")
     print("ssss")
 
+
 @bot.listen
 async def on_guild_join(self, guild):
     guild_owner = bot.get_user(int(guild.owner.id))
-    if not Banned(guild,'guild'):
-        
-        await guild.text_channels[0].send(f"""
+    if not Banned(guild, "guild"):
+
+        await guild.text_channels[0].send(
+            f"""
                                 hi <@{guild_owner.id}> \n \n
 
                                           
@@ -140,19 +143,17 @@ async def on_guild_join(self, guild):
 
 
                                 for help run Data!help\n
-                                """)
+                                """
+        )
         print(f"Joined {guild.name}")
-        with open('guilds.json','r') as f:
+        with open("guilds.json", "r") as f:
             j = json.load(f)
 
-        j['guilds'][guild.id] = {
-            "general":None,
-            "Announsmets":None,
-            "banned":False
-        }
+        j["guilds"][guild.id] = {"general": None, "Announsmets": None, "banned": False}
 
     else:
-        await guild.text_channels[0].send(f"""
+        await guild.text_channels[0].send(
+            f"""
                                 @here \n
                                 Someone , One Of your moderators / server makers, invited me.\n\n
 
@@ -168,12 +169,13 @@ async def on_guild_join(self, guild):
                                 Also <@{bot.author_id}> Is me :D , If this actualy pings The Owner of the bot , 
                                            
                                            
-                                """)
-        with open('banned.txt','a') as f:
+                                """
+        )
+        with open("banned.txt", "a") as f:
             f.write(guild_owner.id)
-        guild.leave()    
-        
-    
+        guild.leave()
+
+
 if __name__ == "__main__":  # Ensures this is the file being ran
     for extension in extensions:
         bot.load_extension(extension)  # Loades every extension.
