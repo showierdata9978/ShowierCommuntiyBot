@@ -2,17 +2,19 @@ import os
 import random
 import json
 
-
-from nextcord.ext import commands
-import nextcord
-import logging
 import asyncio
 import time
 
-from cogs.levling.levelingfunc import add_experience, level_up, update_data
 from dotenv import load_dotenv
+from nextcord.ext import commands
+import nextcord
+import logging
 
-from reloading import reloading
+
+from cogs.levling.levelingfunc import add_experience, level_up, update_data
+
+
+
 
 def Logs():
     global log_name
@@ -182,7 +184,7 @@ if __name__ == "__main__":  # Ensures this is the file being ran
 
 
 # Starts the bot
-@reloading
+
 def runbot():
     load_dotenv()
     token = os.environ.get("token")
