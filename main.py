@@ -13,9 +13,9 @@ import logging
 
 from cogs.levling.levelingfunc import add_experience, level_up, update_data
 
+from reload import bot_reload
 
-
-
+reload = bot_reload(file=__file__,gitlink="https://GitHub.com/ShowierData9978/ShowierCommunityBot")
 def Logs():
     global log_name
     global logger
