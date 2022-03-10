@@ -22,23 +22,23 @@ def Logs():
     global lgrall
 
     log_name = f"{time.time()}"
-    f = open(f"logs/all/{log_name}.log", "x")
-    logger = logging.getLogger("nextcord")
-    logger.setLevel(logging.INFO)
-    handler = logging.FileHandler(
-        filename=f"logs/all/{log_name}.log", encoding="utf-8", mode="w"
-    )
-    handler.setFormatter(
-        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    )
-    logger.addHandler(handler)
-    lgrall = logging.getLogger("nextcord")
-    lgrall.setLevel(logging.DEBUG)
-    handler = logging.FileHandler(filename=f"logs/all.log", encoding="utf-8", mode="w")
-    handler.setFormatter(
-        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    )
-    lgrall.addHandler(handler)
+    with open(f"logs/all/{log_name}.log", "x"):
+        logger = logging.getLogger("nextcord")
+        logger.setLevel(logging.INFO)
+        handler = logging.FileHandler(
+            filename=f"logs/all/{log_name}.log", encoding="utf-8", mode="w"
+        )
+        handler.setFormatter(
+            logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
+        )
+        logger.addHandler(handler)
+        lgrall = logging.getLogger("nextcord")
+        lgrall.setLevel(logging.DEBUG)
+        handler = logging.FileHandler(filename=f"logs/all.log", encoding="utf-8", mode="w")
+        handler.setFormatter(
+            logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
+        )
+        lgrall.addHandler(handler)
 
 
 Logs()
@@ -62,8 +62,7 @@ extensions = [
     "cogs.Commands",
     "cogs.ecom",
 ]
-
-
+bot.load_extension(reload)
 @bot.event
 async def on_member_join(member):
     await member.send(
