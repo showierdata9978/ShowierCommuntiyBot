@@ -12,7 +12,6 @@ from cogs.levling.levelingfunc import add_experience, level_up, update_data
 from dotenv import load_dotenv
 
 
-
 def Logs():
     global log_name
     global logger
