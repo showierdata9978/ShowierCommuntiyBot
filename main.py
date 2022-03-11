@@ -7,7 +7,6 @@ import nextcord
 import logging
 import asyncio
 import time
-import update
 from cogs.levling.levelingfunc import add_experience, level_up, update_data
 from dotenv import load_dotenv
 
@@ -91,7 +90,7 @@ def Banned(member):
 @bot.event
 async def on_message(message):
     if message.author.bot is False:
-        if not Banned(message.author):
+       
             with open("users.json", "r") as f:
                 users = json.load(f)
             await update_data(users, message.author)
@@ -99,8 +98,6 @@ async def on_message(message):
             await level_up(users, message.author, message)
             with open("users.json", "w") as f:
                 json.dump(users, f)
-                await bot.process_commands(message)
-
 
 @bot.event
 async def on_command_error(ctx, error):
