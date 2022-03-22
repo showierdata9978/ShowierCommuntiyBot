@@ -10,14 +10,11 @@ import datetime
 import time
 
 
-
-
 class Command(commands.Cog, name="normal commands"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name="ping")
-    
     async def ping(self, ctx):
         self.ctx = ctx
         await self.ctx.send(
@@ -26,7 +23,6 @@ class Command(commands.Cog, name="normal commands"):
         return "done"
 
     @commands.command(name="Announce", AdminsOnly=True)
-    
     async def announce(self, ctx, *, message):
         self.announsment = []
         for channel in ctx.Guild.channels:
@@ -36,14 +32,12 @@ class Command(commands.Cog, name="normal commands"):
         await self.channel.send(f"@everyone {message}")
 
 
-
 class DevCommands(commands.Cog, name="Developer Commands"):
     """These are the developer commands"""
 
     def __init__(self, bot):
         self.bot = bot
 
-    
     async def cog_check(self, ctx):
         """
         The default check for this cog whenever a command is used. Returns True if the command is allowed.
@@ -54,7 +48,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         name="reload",  # Name of the command, defaults to function name.
         aliases=["rl"],  # Aliases for the command.
     )
-    
     async def reload(self, ctx, cog):
         """
         Reloads a cog.
@@ -73,7 +66,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             await ctx.send("Unknown Cog")  # If the cog isn't found/loaded.
 
     @commands.command(name="unload", aliases=["ul"])
-    
     async def unload(self, ctx, cog):
         """
         Unload a cog.
@@ -86,7 +78,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await ctx.send(f"`{cog}` has successfully been unloaded.")
 
     @commands.command(name="load")
-    
     async def load(self, ctx, cog):
         """
         Loads a cog.
@@ -100,7 +91,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             await ctx.send(f"`{cog}` does not exist!")
 
     @commands.command(name="listcogs", aliases=["lc"])
-    
     async def listcogs(self, ctx):
         """
         Returns a list of all enabled commands.
@@ -111,7 +101,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await ctx.send(base_string)
 
     @commands.command(name="Shutoff", aliases=["ShutDown", "TurnOff", "poweroff", "Sd"])
-    
     async def shutdown(self, ctx):
         await ctx.send("Shutting down")
         await ctx.bot.close()
@@ -120,7 +109,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         sys.exit(0)
 
     @commands.command(name="say")
-    
     async def say(self, ctx, *, message):
 
         self.ctx = ctx
@@ -129,13 +117,11 @@ class DevCommands(commands.Cog, name="Developer Commands"):
         await self.ctx.send(message)
 
     @commands.command(name="ban")
-    
     async def ban(self, ctx, *, Memeber: nextcord.member):
         with open("banned.txt", "a") as f:
             f.write(Memeber.id)
 
     @commands.command("unban")
-    
     async def unban(self, ctx, *, member):
         with open("banned.txt", "r") as file:
             lines = file.readlines()
@@ -149,7 +135,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
                     file.write(line)
 
     @commands.command()
-    
     async def servers(self, ctx):
         activeservers = self.bot.guilds
         for guild in activeservers:
@@ -157,7 +142,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             print(guild.name)
 
     @commands.command()
-    
     async def banguild(self, ctx, guild_name):
         targetGuild = nextcord.utils.get(self.bot.guilds, name=guild_name)
         if targetGuild is None:
@@ -178,7 +162,6 @@ class DevCommands(commands.Cog, name="Developer Commands"):
             json.dump(guilds)
 
     @commands.command(name="UnbanGuild")
-    
     async def UnbanGuild(self, ctx, guild_id):
         with open("guilds.json") as f:
             a = json.load(f)
