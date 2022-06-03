@@ -53,7 +53,7 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 
 [[package]]
 name = "bottle"
-version = "0.12.19"
+version = "0.12.20"
 description = "Fast and simple WSGI-framework for small web-applications."
 category = "main"
 optional = false
@@ -253,7 +253,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "dc19ba251ddf5d0ac10608a9af333af1ddf24eb340357bd9cfb1c4b75f39d5ce"
+content-hash = "b4c38959920eaa7eba77c5a8d597f291dec1c8177002416b7f490a1e05f6fd7a"
 
 [metadata.files]
 aiohttp = [
@@ -343,8 +343,8 @@ attrs = [
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
 ]
 bottle = [
-    {file = "bottle-0.12.19-py3-none-any.whl", hash = "sha256:f6b8a34fe9aa406f9813c02990db72ca69ce6a158b5b156d2c41f345016a723d"},
-    {file = "bottle-0.12.19.tar.gz", hash = "sha256:a9d73ffcbc6a1345ca2d7949638db46349f5b2b77dac65d6494d45c23628da2c"},
+    {file = "bottle-0.12.20-py3-none-any.whl", hash = "sha256:3c97e1e955c11e4ad2d73a60cdf83c4f4cf7b8b73c8344fc4b72f985432605cb"},
+    {file = "bottle-0.12.20.tar.gz", hash = "sha256:544023cd2cd6d382ebf9675fa0544d4d20e19d3a13b6932a812d099fb2f6cb84"},
 ]
 cfgv = [
     {file = "cfgv-3.3.1-py2.py3-none-any.whl", hash = "sha256:c6a0883f3917a037485059700b9e75da2464e6c27051014ad85ba6aaa5884426"},
